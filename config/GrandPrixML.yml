@@ -1,0 +1,33 @@
+behaviors:
+  GrandPrixAgent:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 256
+      buffer_size:  2048
+      learning_rate: 0.0002
+      beta: 0.005
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: constant
+    network_settings:
+      normalize: false
+      hidden_units: 512
+      num_layers: 2
+      vis_encode_type: simple
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 0.8
+      gail:
+        strength: 0.25
+        use_actions: true
+        demo_path: Assets/Demonstrations/CP3Demo.demo
+        network_settings:
+          normalize: false
+          hidden_units: 512
+          num_layers: 2
+    keep_checkpoints: 40
+    max_steps: 25000000
+    time_horizon: 256
+    summary_freq: 5000
